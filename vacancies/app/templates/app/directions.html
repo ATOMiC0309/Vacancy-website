@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ block.super }}: All directions
+{% endblock title %}
+
+{% block main %}
+
+<div class="card border border-primary shadow-0 " style="background-color:#d1d1d1;">
+  <div class="card-header d-flex justify-content-between">
+      <div>All directions</div>
+      <div class="d-flex justify-content-between">
+          <div><a href="{% url 'direction_create' %}"><i class="fas fa-circle-plus fa-lg" style="margin-right: 4px"> </i>Add</a></div>
+      </div>
+
+  </div>
+
+  <div class="card-body">
+    {% for direction in directions %}
+      <div class="card border border-primary shadow-0 mb-2" >
+          <div class="card-header d-flex justify-content-between">
+            <div>Direction</div>
+            <div class="d-flex justify-content-between">
+                <div><a href="{% url 'direction_delete' direction.pk %}" style="margin-right: 10px"><i class="far fa-trash-can fa-lg"></i></a></div>
+                <div><a href="{% url 'direction_update' direction.pk %}"><i class="far fa-pen-to-square fa-lg"></i></a></div>
+            </div>
+
+          </div>
+
+          <div class="card-body">
+            <h5 class="card-title"><a href="{% url 'vacancies_by_direction' direction.pk %}">{{ direction.title }}</a></h5>
+          </div>
+          <div class="card-footer"><pre><b>Created:</b> {{ direction.created }}</pre></div>
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+{% endblock main %}

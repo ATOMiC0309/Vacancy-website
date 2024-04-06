@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}
+    Direction delete
+{% endblock title %}
+{% block main %}
+<form method="POST">
+    {% csrf_token %}
+    <p><b>{{ direction.title }}</b> Siz ushbu directionni o'chirmoqchimisiz?</p>
+    <a href="{% url 'all_directions' %}" type="button" class="btn btn-primary">Ortga</a>
+    <button type="submit" class="btn btn-primary">Ha</button>
+</form>
+{% endblock main %}

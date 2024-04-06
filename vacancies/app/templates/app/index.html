@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   {{ block.super }} home page.
+{% endblock title %}
+
+{% block main %}
+    <div class="d-flex justify-content-between">
+    <div class="list-group list-group-light col-2">
+              <a href="{% url 'index' %}" class="list-group-item list-group-item-action px-3 border-0">All vacancies</a>
+                <hr>
+              {% for direction in directions %}
+              <a href="{% url 'vacancies_by_direction' direction.pk %}" class="list-group-item list-group-item-action px-3 border-0">{{ direction.title }}</a>
+              {% endfor %}
+                <hr>
+                <a href="{% url 'vacancy_create' %}" class="list-group-item list-group-item-action px-3 border-0">Add vacancy</a>
+                <hr>
+              <a href="{% url 'all_directions' %}" class="list-group-item list-group-item-action px-3 border-0">All directions</a>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4 col-10">
+          {% for vacancy in vacancies %}
+            <div class="card  w-100" style="background-color:#fffafa;">
+                <div class="card-header d-flex justify-content-between">
+                    <div></div>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <i class="far fa-eye fa-sm" style="margin-right: 10px;">100</i>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title"><a href="{% url 'vacancy_detail' vacancy.pk %}">{{ vacancy.title }}</a></h4>
+                        <h3>Company: <i>{{ vacancy.company_name }}</i></h3>
+                        <h2>Salary: <b>{{ vacancy.salary_from }} - {{ vacancy.salary_to }} $</b></h2>
+                        <p class="card-text">
+                          Experience from {{ vacancy.work_experience_from }} to {{ vacancy.work_experience_to }} years
+                        </p>
+                        <p class="card-text">
+                          <b>Requirements:</b>  {{ vacancy.required_task }}
+                        </p>
+
+                    <a style="width: 12%" href="{% url 'vacancy_detail' vacancy.pk %}" type="button" class="btn btn-primary">Detail</a>
+                    <a style="width: 15%; background-color: white; color: #3b71ca; border: 1px solid #3b71ca;" href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=DmwnWrRlRZVbgCMsMvLSWJLBBKQqrkCpKSPsLmlBQsxtZdVbqzkQfXGBgqBdjkFRpFKhzKdKrGPl" target="_blank" type="button" class="btn btn-primary">Contact</a>
+                </div>
+                <div class="card-footer">{{ vacancy.updated }}</div>
+            </div>
+          {% endfor %}
+    </div>
+
+</div>
+{% endblock main %}

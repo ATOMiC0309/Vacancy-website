@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}
+    Vacancy delete
+{% endblock title %}
+{% block main %}
+<form method="POST">
+    {% csrf_token %}
+    <p><b>{{ vacancy.title }}</b> Siz ushbu vakansiyani o'chirmoqchimisiz?</p>
+    <a href="{% url 'index' %}" type="button" class="btn btn-primary">Ortga</a>
+    <button type="submit" class="btn btn-primary">Ha</button>
+</form>
+{% endblock main %}
